@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!--左边导航栏-->
+<div th:fragment="left" class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item"><a class="layui-this">控制台</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">员工信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/employee/emps}">员工信息列表</a></dd>
+                </dl>
+            </li>
+            <!--需要添加请按照下面的模板修改-->
+            <li class="layui-nav-item">
+                <a href="javascript:;">退休员工信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/RetireInfo/list}">退休员工信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">证件信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/CertificatesInfo/list}">健康/计生证信息列表</a></dd>
+                    <dd><a th:href="@{/EmployeeCard/list}">员工工作证信息列表</a></dd>
+                    <dd><a th:href="@{/ProfessionalSkills/list}">专业技能证书信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">合同情况信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/ContractSign/list}">合同情况信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">家庭信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/FamilyInfo/list}">家庭情况信息列表</a></dd>
+                    <dd><a th:href="@{/BirthdayRecord/list}">生育纪录信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">免搭伙费信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/FreeCharge/list}">免搭伙费信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">就职情况信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/InductionInfo/list}">就职情况信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">公积金购买信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/ProvidentFundPurchase/list}">公积金购买信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">购保情况信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/PurchaseInsurance/list}">购保情况信息列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">接受过培训信息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/ReceiveTraining/list}">接受过培训信息列表</a></dd>
+                </dl>
+            </li>
+
+
+        </ul>
+    </div>
+</div>
+</body>
+</html>

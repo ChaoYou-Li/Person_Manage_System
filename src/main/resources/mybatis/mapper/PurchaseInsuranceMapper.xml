@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.PurchaseInsuranceMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.PurchaseInsurance">
+        <id column="pur_id" property="purId" />
+        <result column="pur_start_time" property="purStartTime" />
+        <result column="pur_end_time" property="purEndTime" />
+        <result column="pur_computer" property="purComputer" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        pur_id, pur_start_time, pur_end_time, pur_computer, emp_id
+    </sql>
+    <select id="findAllPurchaseInsuranceBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.PurchaseInsurance">
+        SELECT * FROM purchase_insurance WHERE pur_computer LIKE #{parame}
+    </select>
+
+</mapper>

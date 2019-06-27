@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="purchase_insurance_model" th:case="'purchase_insurance_model'">
+    <legend th:text="${type == 'create' ? '购保情况 - 信息新增' : '购保情况 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="purId" th:if="${purchaseInsurance != null}" th:value="${purchaseInsurance.purId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">购保时间</label>
+                <div class="layui-input-block">
+                    <input type="date"  name="purStartTime" th:value="${purchaseInsurance != null} ? ${#dates.format(purchaseInsurance.purStartTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入购保时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">停保时间</label>
+                <div class="layui-input-inline">
+                    <input type="date"  name="purEndTime" th:value="${purchaseInsurance != null} ? ${#dates.format(purchaseInsurance.purEndTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入停保时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">个人电脑号</label>
+                <div class="layui-input-inline">
+                    <input type="text"  name="purComputer" th:value="${purchaseInsurance != null} ? ${purchaseInsurance.purComputer}" required  lay-verify="required" placeholder="请输入个人电脑号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工</label>
+                <div class="layui-input-block">
+                    <select name="empId" required  lay-verify="required" placeholder="请选择员工">
+                        <option th:each="employee:${employees}" th:selected="${purchaseInsurance != null && purchaseInsurance.empId == employee.empId} ? 'selected'" th:value="${employee.empId}">[[${employee.empName}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>
+</body>
+</html>

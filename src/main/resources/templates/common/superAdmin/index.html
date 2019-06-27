@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<!--引入thymeleaf命名空间-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>人事管理系统</title>
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+
+    <div th:replace="common/superAdmin/common_top :: top"></div>
+    <div th:replace="common/superAdmin/common_left ::left"></div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <fieldset class="layui-elem-field">
+            <legend>人事管理系统</legend>
+            <div class="layui-field-box">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                        <th>学校</th>
+                        <th>系统创建时间</th>
+                        <th>签名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>中大新华学院</td>
+                        <td>2019-3-30</td>
+                        <td>争取做最好的系统</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © layui.com - 底部固定区域
+  </div>
+</div>
+<script type="text/javascript" th:src="@{/javascript/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/javascript/index.js}"></script>
+</body>
+</html>

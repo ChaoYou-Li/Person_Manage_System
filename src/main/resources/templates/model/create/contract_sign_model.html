@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="contract_sign_model" th:case="'contract_sign_model'">
+    <legend th:text="${type == 'create'? '合同签订情况 - 信息新增' : '合同签订情况 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="conId" th:if="${contractSign != null}" th:value="${contractSign.conId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">合同类型</label>
+                <div class="layui-input-block">
+                    <!-- 判断当contractSign这个参数对象不为空的时候th:value才成立 -->
+                    <input type="text"  name="conType" th:value="${contractSign != null} ? ${contractSign.conType}" required  lay-verify="required" placeholder="请输入合同类型" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">到期时间</label>
+                <div class="layui-input-block">
+                    <input type="date"  name="conEnpireTime" th:value="${contractSign != null} ? ${#dates.format(contractSign.conEnpireTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入合同到期时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">签订情况</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="conHistory" th:value="${contractSign != null} ? ${contractSign.conHistory}" required  lay-verify="required" placeholder="请输入合同历史签订情况" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工</label>
+                <div class="layui-input-block">
+                    <select name="empId" required  lay-verify="required" placeholder="请选择员工">
+                        <!-- 设置员工信息选择项，并且根据判断生育记录的员工外键和员工id是否相等，来设置被选中项-->
+                        <option th:each="employee:${employees}" th:selected="${contractSign != null && contractSign.empId == employee.empId} ? 'selected'" th:value="${employee.empId}">[[${employee.empName}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</fieldset>
+</body>
+</html>

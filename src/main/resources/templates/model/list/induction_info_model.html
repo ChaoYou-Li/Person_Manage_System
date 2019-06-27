@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="layui-body" th:fragment="induction_info_model" th:case="'induction_info_model'">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <fieldset class="layui-elem-field">
+            <legend>就职情况 - 信息列表</legend>
+            <div class="layui-field-box">
+                <form class="layui-form" method="post" th:action="@{/InductionInfo/search}">
+                    <div class="layui-form-item" style="text-align:center;">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="请输入要查询的信息" type="text" name="data" value="">
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="text-align:left;">
+                            <div class="layui-input-inline">
+                                <button class="layui-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="/InductionInfo/create" dw-title="新增用户" dw-width="70%" dw-height="80%">
+                        <i class="layui-icon">&#xe654;</i>新增
+                    </button>
+                    <button class="layui-btn layui-btn-xs layui-btn-danger batch-delete" dw-url="/InductionInfo/batchDelete">
+                        <i class="layui-icon">&#xe640;</i>删除
+                    </button>
+                    <button class="layui-btn layui-btn-xs refresh" dw-url="/InductionInfo/list">
+                        <i class="layui-icon">&#x1002;</i>刷新
+                    </button>
+                </div>
+                <hr>
+                <table class="layui-table" id="tableDemo">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col width="100">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="selectAll" width="20px"><input type="checkbox"></th>
+                        <th width="40px">编号</th>
+                        <th width="110px">入职时间</th>
+                        <th width="110px">离职时间</th>
+                        <th width="550px">历史就职纪录</th>
+                        <th width="40px">员工编号</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="inductionInfo : ${list}">
+                        <td><input type="checkbox" name="empId" th:value="${inductionInfo.indId}"></td>
+                        <td th:text="${inductionInfo.indId}"></td>
+                        <td th:text="${#dates.format(inductionInfo.indEntryTime, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${#dates.format(inductionInfo.indQuitTime, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${inductionInfo.indEntryHistory}"></td>
+                        <td th:text="${inductionInfo.empId}"></td>
+
+                        <td class="text-center">
+                            <div class="layui-btn-group" ><!--get请求-->
+                                <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog"  th:dw-url="'/InductionInfo/update/'+${inductionInfo.indId}"  dw-title="编辑员工" dw-width="70%" dw-height="80%">
+                                    <i class="layui-icon">&#xe642;</i>编辑
+                                </button>                            <!--delete请求，想了解如何实现，请阅读dw.js-->
+                                <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" th:dw-url="'/InductionInfo/delete/'+${inductionInfo.indId}" th:dw-title="${inductionInfo.indId}">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+
+        <div style="position: absolute; bottom: 0px; line-height: 30px; width: 100%;">
+            <!--分页-->
+            <div id="pageDemo" style="float: left"></div>
+
+            <!-- 导入/导出到 Excel 操作 -->
+            <div class="layui-btn-group" style="float: right; height: 55px; margin-top: 10px; margin-right: 35px;">
+                <button class="layui-btn layui-btn-sm refresh" dw-url="/InductionInfo/exportExcel">
+                    <i class="layui-icon">&#xe681;</i>导出Excel
+                </button>
+
+                <button class="layui-btn layui-btn-sm operation-excel" id="operation-excel" dw-url="/InductionInfo/updateExcel">
+                    <i class="layui-icon">&#xe601;</i>Excel导入
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.EmployeeCardMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.EmployeeCard">
+        <id column="es_id" property="esId" />
+        <result column="es_start_time" property="esStartTime" />
+        <result column="es_end_time" property="esEndTime" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        es_id, es_start_time, es_end_time, emp_id
+    </sql>
+</mapper>

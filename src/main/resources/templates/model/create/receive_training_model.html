@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="receive_training_model" th:case="'receive_training_model'">
+    <legend th:text="${type == 'create' ? '接受过培训 - 信息新增' : '接受过培训 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="traId" th:if="${receiveTraining != null}" th:value="${receiveTraining.traId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">领过的补助</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="traSubsidy" th:value="${receiveTraining != null} ? ${receiveTraining.traSubsidy}" required  lay-verify="required" placeholder="请输入领过的补助" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">获得过的奖励</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="traReward" th:value="${receiveTraining != null} ? ${receiveTraining.traReward}" required  lay-verify="required" placeholder="请输入获得过的奖励" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工</label>
+                <div class="layui-input-block">
+                    <select name="empId" required  lay-verify="required" placeholder="请选择员工">
+                        <option th:each="emp:${employees}" th:value="${emp.empId}" th:selected="${receiveTraining != null && receiveTraining.empId == emp.empId} ? 'selected'">[[${emp.empName}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>
+</body>
+</html>

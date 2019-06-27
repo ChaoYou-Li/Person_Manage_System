@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="induction_info_model" th:case="'induction_info_model'">
+    <legend th:text="${type == 'create' ? '就职情况 - 信息新增' : '就职情况 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="indId" th:if="${inductionInfo != null}" th:value="${inductionInfo.indId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">入职时间</label>
+                <div class="layui-input-block">
+                    <input type="date"  name="indEntryTime" th:value="${inductionInfo != null} ? ${#dates.format(inductionInfo.indEntryTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入入职时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">离职时间</label>
+                <div class="layui-input-block">
+                    <input type="date"  name="indQuitTime" th:value="${inductionInfo != null} ? ${#dates.format(inductionInfo.indQuitTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入离职时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">就职纪录</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="indEntryHistory" th:value="${inductionInfo != null} ? ${inductionInfo.indEntryHistory}" required  lay-verify="required" placeholder="请输入历史就职纪录" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工</label>
+                <div class="layui-input-block">
+                    <select name="empId" required  lay-verify="required" placeholder="请选择员工">
+                        <option th:each="employee:${employees}" th:selected="${inductionInfo != null && inductionInfo.empId == employee.empId} ? 'selected'" th:value="${employee.empId}">[[${employee.empName}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="layui-body" th:fragment="birthday_record_model" th:case="'birthday_record_model'">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <fieldset class="layui-elem-field">
+            <legend>生育纪录 - 信息列表</legend>
+            <div class="layui-field-box">
+                <form class="layui-form" method="get" th:action="@{/BirthdayRecord/search}">
+                    <div class="layui-form-item" style="text-align:center;">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="请输入要查询的信息" type="text" name="data" value="">
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="text-align:left;">
+                            <div class="layui-input-inline">
+                                <button class="layui-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" th:dw-url="@{/BirthdayRecord/create}" dw-title="新增用户" dw-width="70%" dw-height="80%">
+                        <i class="layui-icon">&#xe654;</i>新增
+                    </button>
+                    <button class="layui-btn layui-btn-xs layui-btn-danger batch-delete" th:dw-url="@{/BirthdayRecord/batchDelete}">
+                        <i class="layui-icon">&#xe640;</i>删除
+                    </button>
+                    <button class="layui-btn layui-btn-xs refresh" th:dw-url="@{/BirthdayRecord/list}">
+                        <i class="layui-icon">&#x1002;</i>刷新
+                    </button>
+                </div>
+                <hr>
+                <table class="layui-table" id="tableDemo">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col width="100">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="selectAll"><input type="checkbox"></th>
+                        <th>编号</th>
+                        <th>孩子数</th>
+                        <th>产检医院</th>
+                        <th>分娩医院</th>
+                        <th>计生证号码</th>
+                        <th>手术日期</th>
+                        <th>员工编号</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="birthdayRecord : ${list}">
+                        <td><input type="checkbox" name="empId" th:value="${birthdayRecord.birId}"></td>
+                        <td th:text="${birthdayRecord.birId}"></td>
+                        <td th:text="${birthdayRecord.birType}"></td>
+                        <td th:text="${birthdayRecord.birProdInspHos}"></td>
+                        <td th:text="${birthdayRecord.birMaterHos}"></td>
+                        <td th:text="${birthdayRecord.birNumber}" ></td>
+                        <td th:text="${#dates.format(birthdayRecord.birOperationTime,'yyyy-MM-dd')}"></td>
+                        <td th:text="${birthdayRecord.empId}" ></td>
+
+                        <td class="text-center">
+                            <div class="layui-btn-group" ><!--get请求-->
+                                <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog"  th:dw-url="@{'/BirthdayRecord/update/'+${birthdayRecord.birId}}"  dw-title="编辑员工" dw-width="70%" dw-height="80%">
+                                    <i class="layui-icon">&#xe642;</i>编辑
+                                </button>                            <!--delete请求，想了解如何实现，请阅读dw.js-->
+                                <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" th:dw-url="@{'/BirthdayRecord/delete/'+${birthdayRecord.birId}}" th:dw-title="${birthdayRecord.birId}">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+
+        <div style="position: absolute; bottom: 0px; line-height: 30px; width: 100%;">
+            <!--分页-->
+            <div id="pageDemo" style="float: left"></div>
+
+            <!-- 导入/导出到 Excel 操作 -->
+            <div class="layui-btn-group" style="float: right; height: 55px; margin-top: 10px; margin-right: 35px;">
+                <button class="layui-btn layui-btn-sm refresh" th:dw-url="@{/BirthdayRecord/exportExcel}">
+                    <i class="layui-icon">&#xe681;</i>导出Excel
+                </button>
+
+                <button class="layui-btn layui-btn-sm operation-excel" id="operation-excel" th:dw-url="@{/BirthdayRecord/updateExcel}">
+                    <i class="layui-icon">&#xe601;</i>Excel导入
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

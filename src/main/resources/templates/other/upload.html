@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+<div class="layui-upload">
+    <button type="button" class="layui-btn" id="uploadPic">上传图片</button>
+    <div class="layui-upload-list">
+        <img class="layui-upload-img" id="pic">
+        <p id="picText"></p>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/javascript/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<!--<script type="text/javascript" th:src="@{/javascript/upload_pic.js}"></script>-->
+<script type="text/javascript">
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#uploadPic'
+            , url: '/upload/pic'
+            , done: function (res) {
+                $('#pic').attr('src',res.data); //图片链接（base64）
+                //$('#empPic').attr('value', result); //填充隐藏的图片链接
+
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                var picText = $('#picText');
+                picText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                picText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+    });
+</script>
+</html>

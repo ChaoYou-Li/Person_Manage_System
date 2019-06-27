@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.ReceiveTrainingMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.ReceiveTraining">
+        <id column="tra_id" property="traId" />
+        <result column="tra_subsidy" property="traSubsidy" />
+        <result column="tra_reward" property="traReward" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tra_id, tra_subsidy, tra_reward, emp_id
+    </sql>
+    <select id="findAllReceiveTrainingBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.ReceiveTraining">
+        SELECT * FROM receive_training WHERE tra_subsidy LIKE #{parame} OR tra_reward LIKE #{parame}
+    </select>
+
+</mapper>

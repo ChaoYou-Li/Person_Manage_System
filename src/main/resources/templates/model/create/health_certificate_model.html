@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="health_certificate_model" th:case="'health_certificate_model'">
+    <legend th:text="${type == 'create' ? '健康证办理 - 信息新增': '健康证办理 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="cerId" th:if="${certificatesInfo != null}" th:value="${certificatesInfo.cerId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">健康证办理时间</label>
+                <div class="layui-input-block">
+                    <input type="date"  name="healStartTime" th:value="${certificatesInfo != null} ? ${#dates.format(certificatesInfo.healStartTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入健康证办理时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">健康证到期时间</label>
+                <div class="layui-input-block">
+                    <input type="date"  name="healEndTime" th:value="${certificatesInfo != null} ? ${#dates.format(certificatesInfo.healEndTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入健康证到期时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">健康证机构</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="healOrganize" th:value="${certificatesInfo != null} ? ${certificatesInfo.healOrganize}" required  lay-verify="required" placeholder="请输入健康证机构" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                    <label class="layui-form-label">健康证是否持有原件</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="healHave" value="1" title="是" th:checked="${certificatesInfo != null} ? ${certificatesInfo.healHave == 1}">
+                    <input type="radio" name="healHave" value="0" title="否" th:checked="${certificatesInfo != null} ? ${certificatesInfo.healHave == 0}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">计生证编号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fpNumber" th:value="${certificatesInfo != null} ? ${certificatesInfo.fpNumber}" required  lay-verify="required" placeholder="请输入计生证编号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">计生证户籍地</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fpHousehold" th:value="${certificatesInfo != null} ? ${certificatesInfo.fpHousehold}" required  lay-verify="required" placeholder="请输入计生证户籍地" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">计生证避孕措施</label>
+                <div class="layui-input-block">
+                    <select name="fpStep" required  lay-verify="required" placeholder="请选择避孕措施">
+                        <option th:each="con : ${contraceptive}" th:selected="${certificatesInfo != null && certificatesInfo.fpStep == con.type} ? 'selected'">[[${con.type}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">计生证居住地</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fpPlace" th:value="${certificatesInfo != null} ? ${certificatesInfo.fpPlace}"  required  lay-verify="required" placeholder="请输入计生证居住地" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">计生部门电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fpPhone" th:value="${certificatesInfo != null} ? ${certificatesInfo.fpPhone}"  required  lay-verify="phone" placeholder="请输入计生部门电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">计生证有效时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fpValidTime" th:value="${certificatesInfo != null} ? ${certificatesInfo.fpValidTime}"  required  lay-verify="required" placeholder="请输入计生证有效时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">证件类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="cerSign" value="1" title="健康证" th:checked="${certificatesInfo != null} ? ${certificatesInfo.cerSign == 1}">
+                    <input type="radio" name="cerSign" value="2" title="计生证" th:checked="${certificatesInfo != null} ? ${certificatesInfo.cerSign == 2}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工</label>
+                <div class="layui-input-block">
+                    <select name="empId" required  lay-verify="required" placeholder="请选择员工">
+                        <option th:each="employee:${employees}" th:selected="${certificatesInfo != null && certificatesInfo.empId == employee.empId} ? 'selected'" th:value="${employee.empId}">[[${employee.empName}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</fieldset>
+</body>
+</html>

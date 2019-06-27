@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!--左边导航栏-->
+<div th:fragment="left" class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item"><a class="layui-this">控制台</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">人事管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a >人事信息列表</a></dd>
+                </dl>
+            </li>
+            <!--需要添加请按照下面的模板修改-->
+            <li class="layui-nav-item">
+                <a href="javascript:;">数据管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/excel/show}">数据导出</a></dd>
+                </dl>
+            </li>
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">会员管理</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a href="../member.html">会员列表</a></dd>-->
+                <!--</dl>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">开发者工具</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a href="control.html">一键生成</a></dd>-->
+                <!--</dl>-->
+            <!--</li>-->
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">集成Demo</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a href="upload.html">文件上传</a></dd>-->
+                    <!--<dd><a href="upload.html">Execel导出</a></dd>-->
+                <!--</dl>-->
+            <!--</li>-->
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.ContractSignMapper">
+
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.ContractSign">
+        <id column="con_id" property="conId" />
+        <result column="con_type" property="conType" />
+        <result column="con_enpire_time" property="conEnpireTime" />
+        <result column="con_history" property="conHistory" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        con_id, con_type, con_enpire_time, con_history, emp_id
+    </sql>
+    <select id="findAllContractSignBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.ContractSign">
+        SELECT * FROM contract_sign WHERE con_type LIKE #{parame} OR con_history LIKE #{parame}
+    </select>
+</mapper>

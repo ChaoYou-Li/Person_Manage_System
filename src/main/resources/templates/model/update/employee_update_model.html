@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="employee_update_model">
+    <legend >员工管理 - 修改员工</legend>
+    <div class="layui-field-box">
+
+        <form class="layui-form" method="post" th:action="'/employee/emp/'+${employee.empId}">
+            <!--put方式提交-->
+            <input type="hidden" name="_method" value="put">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="empName" th:value="${employee.empName}" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="empSex"  value="1" title="男" th:checked="${employee.empSex eq 1}">
+                    <input type="radio" name="empSex" value="2" title="女"  th:checked="${employee.empSex eq 2}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否结婚</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="empMarry" value="1" title="是" th:checked="${employee.empMarry eq 1}">
+                    <input type="radio" name="empMarry" value="2" title="否" th:checked="${employee.empMarry eq 2}">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">民族</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empNation" th:value="${employee.empNation}" required  lay-verify="required" placeholder="请输入民族" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">工号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empNumber" th:value="${employee.empNumber}" required  lay-verify="required" placeholder="请输入工号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">生日</label>
+                <div class="layui-input-block">
+                    <input type="date" name="empBirthday" th:value="${#dates.format(employee.empBirthday,'yyyy-MM-dd')}" id="empBirthday" required  lay-verify="required" placeholder="请输入生日" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">身份证</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empCard" th:value="${employee.empCard}" required  lay-verify="required" placeholder="请输入身份证" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empDepart" th:value="${employee.empDepart}" required  lay-verify="required" placeholder="请输入部门" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">职位</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empPosition" th:value="${employee.empPosition}" required  lay-verify="required" placeholder="请输入职位" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">毕业院校</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empSchool" th:value="${employee.empSchool}" required  lay-verify="required" placeholder="请输入毕业院校" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empPhone" th:value="${employee.empPhone}" required  lay-verify="required" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empEmail" th:value="${employee.empEmail}" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">居住地</label>
+                <div class="layui-input-block">
+                    <input type="text" name="empAddr" th:value="${employee.empAddr}" required  lay-verify="required" placeholder="请输入居住地" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="hidden" name="empPic" id="empPic" th:value="${employee.empPic}" required  lay-verify="required" placeholder="请输入个人照片" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </form>
+
+        <!--异步上传照片，并将返回的图片路径填充到上面表单的相关位置，见upload_pic-->
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" id="uploadPic">上传图片</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" th:src="${employee.empPic}" id="pic">
+                    <p id="picText"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</fieldset>
+</body>
+</html>

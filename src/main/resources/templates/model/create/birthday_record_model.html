@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="birthday_record_model" th:case="'birthday_record_model'">
+    <legend th:text="${type == 'create' ? '生育纪录 - 信息新增' : '生育纪录 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="birId" th:if="${birthdayRecord != null}" th:value="${birthdayRecord.birId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">头胎/其他胎</label>
+                <div class="layui-input-block">
+                    <select name="birType" required lay-verify="required" placeholder="请选择头胎还是其他胎">
+                        <!--<option></option>-->
+                        <option th:each="childtype:${child}" th:selected="${birthdayRecord != null && birthdayRecord.birType == childtype.childType} ? 'selected'">[[${childtype.childType}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">产检医院</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="birProdInspHos" th:value="${birthdayRecord != null} ? ${birthdayRecord.birProdInspHos}" required  lay-verify="required" placeholder="请输入产检医院" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">分娩医院</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="birMaterHos" th:value="${birthdayRecord != null} ? ${birthdayRecord.birMaterHos}" required  lay-verify="required" placeholder="请输入分娩医院" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">计生证号码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="birNumber" th:value="${birthdayRecord != null} ? ${birthdayRecord.birNumber}" required  lay-verify="required" placeholder="请输入计生证号码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">手术日期</label>
+                <div class="layui-input-block">
+                    <input type="date" name="birOperationTime" th:value="${birthdayRecord != null} ? ${#dates.format(birthdayRecord.birOperationTime, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入手术日期" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工</label>
+                <div class="layui-input-block">
+                    <select name="empId" required  lay-verify="required" placeholder="请选择生育员工">
+                        <option th:each="employee : ${employees}" th:value="${employee.empId}" th:selected="${birthdayRecord != null && birthdayRecord.empId == employee.empId} ? 'selected'">[[${employee.empName}]]</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</fieldset>
+</body>
+</html>

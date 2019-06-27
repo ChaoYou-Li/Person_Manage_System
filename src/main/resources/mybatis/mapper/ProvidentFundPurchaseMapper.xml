@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.ProvidentFundPurchaseMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.ProvidentFundPurchase">
+        <id column="pfp_id" property="pfpId" />
+        <result column="pfp_start_time" property="pfpStartTime" />
+        <result column="pfp_end_time" property="pfpEndTime" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        pfp_id, pfp_start_time, pfp_end_time, emp_id
+    </sql>
+    <!--<select id="findAllProvidentFundPurchaseBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.ProvidentFundPurchase">-->
+        <!--SELECT * FROM provident_fund_purchase WHERE ps_info LIKE #{parame} OR ps_level LIKE #{parame} OR ps_number LIKE #{parame}-->
+    <!--</select>-->
+
+</mapper>

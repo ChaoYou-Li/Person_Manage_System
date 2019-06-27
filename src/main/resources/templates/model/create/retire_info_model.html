@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="retire_info_model" th:case="'retire_info_model'">
+    <legend th:text="${type == 'create' ? '退休人员信息 - 信息新增' : '退休人员信息 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="retId" th:if="${retireInfo != null}" th:value="${retireInfo.retId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="retName" th:value="${retireInfo != null} ? ${retireInfo.retName}" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="retSex" value="1" title="男" th:checked="${retireInfo != null} ? ${retireInfo.retSex == 1}">
+                    <input type="radio" name="retSex" value="0" title="女" th:checked="${retireInfo != null} ? ${retireInfo.retSex == 0}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">民族</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="retNation" th:value="${retireInfo != null} ? ${retireInfo.retNation}" required  lay-verify="required" placeholder="请输入民族" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">生日</label>
+                <div class="layui-input-block">
+                    <input type="date"  name="retBirthday" th:value="${retireInfo != null} ? ${#dates.format(retireInfo.retBirthday, 'yyyy-MM-dd')}" required  lay-verify="required" placeholder="请输入生日" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">身份证号码</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="retIdCard" th:value="${retireInfo != null} ? ${retireInfo.retIdCard}" required  lay-verify="required" placeholder="请输入身份证号码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">银行卡</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="retBankCard" th:value="${retireInfo != null} ? ${retireInfo.retBankCard}" required  lay-verify="required" placeholder="请输入银行卡" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话号码</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="retPhone" th:value="${retireInfo != null} ? ${retireInfo.retPhone}" required  lay-verify="phone" placeholder="请输入电话号码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">居住地</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="retAddr" th:value="${retireInfo != null} ? ${retireInfo.retAddr}" required  lay-verify="required" placeholder="请输入居住地" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">紧急电话</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="retEmerPhone" th:value="${retireInfo != null} ? ${retireInfo.retEmerPhone}" required  lay-verify="phone" placeholder="请输入紧急电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</fieldset>
+
+</body>
+</html>

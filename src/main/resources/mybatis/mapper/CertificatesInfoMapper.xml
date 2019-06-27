@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.CertificatesInfoMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.CertificatesInfo">
+        <id column="cer_id" property="cerId" />
+        <result column="heal_start_time" property="healStartTime" />
+        <result column="heal_end_time" property="healEndTime" />
+        <result column="heal_organize" property="healOrganize" />
+        <result column="heal_have" property="healHave" />
+        <result column="fp_number" property="fpNumber" />
+        <result column="fp_household" property="fpHousehold" />
+        <result column="fp_step" property="fpStep" />
+        <result column="fp_place" property="fpPlace" />
+        <result column="fp_phone" property="fpPhone" />
+        <result column="fp_valid_time" property="fpValidTime" />
+        <result column="cer_sign" property="cerSign" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        cer_id, heal_start_time, heal_end_time, heal_organize, heal_have, fp_number, fp_household, fp_step, fp_place, fp_phone, fp_valid_time, cer_sign, emp_id
+    </sql>
+    <select id="findAllCertificatesInfoBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.CertificatesInfo">
+        SELECT * FROM certificates_info WHERE heal_organize LIKE #{parame} OR heal_have LIKE #{parame} OR fp_number LIKE #{parame} OR fp_household LIKE #{parame} OR fp_step LIKE #{parame} OR fp_place LIKE #{parame} OR fp_phone LIKE #{parame} OR fp_valid_time LIKE #{parame} OR cer_sign LIKE #{parame}
+    </select>
+</mapper>

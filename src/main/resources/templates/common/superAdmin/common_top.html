@@ -1,0 +1,20 @@
+<!--上面导航栏-->
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="top" class="layui-header">
+    <div class="layui-logo">人事管理系统</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item" th:if="${session.admin != null}" >欢迎您，[[${session.admin.username}]]</li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item"><a th:href="@{/login/out}">退出登录</a></li>
+    </ul>
+</div>
+</body>
+</html>

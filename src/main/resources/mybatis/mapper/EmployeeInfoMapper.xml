@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.EmployeeInfoMapper">
+
+    <!--模糊查询
+    parameterType 入参
+    resultType 返回值
+    id 函数名
+    CONCAT 拼接模糊查询的语句
+    -->
+
+    <select id="findAllEmployeeInfosBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.EmployeeInfo">
+        SELECT * FROM employee_info WHERE emp_name LIKE #{param} OR emp_sex LIKE #{param} OR emp_nation LIKE #{param} OR emp_number LIKE #{param} OR emp_card LIKE #{param} OR emp_marry LIKE #{param} OR emp_depart LIKE #{param} OR emp_position LIKE #{param} OR emp_school LIKE #{param} OR emp_phone LIKE #{param} OR emp_email LIKE #{param} OR emp_addr LIKE #{param}
+    </select>
+
+</mapper>

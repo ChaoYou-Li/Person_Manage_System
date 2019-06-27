@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.BirthdayRecordMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.BirthdayRecord">
+        <id column="bir_id" property="birId" />
+        <result column="bir_type" property="birType" />
+        <result column="bir_prod_insp_hos" property="birProdInspHos" />
+        <result column="bir_mater_hos" property="birMaterHos" />
+        <result column="bir_number" property="birNumber" />
+        <result column="bir_operation_time" property="birOperationTime" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+    <!--   -->
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        bir_id, bir_type, bir_prod_insp_hos, bir_mater_hos, bir_number, bir_operation_time, emp_id
+    </sql>
+    <select id="findAllBirthdayRecordBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.BirthdayRecord">
+        SELECT * FROM birthday_record WHERE bir_number LIKE #{parame} OR bir_type LIKE #{parame} OR bir_prod_insp_hos LIKE #{parame} OR bir_mater_hos LIKE #{parame}
+    </select>
+    <select id="findAllBirthdayRecord" parameterType="string" resultType="cn.zdxh.personnelmanage.po.BirthdayRecord">
+        SELECT * FROM birthday_record WHERE bir_id = #{parame} OR emp_id = #{parame} OR bir_number LIKE #{parame} OR bir_type LIKE #{parame} OR bir_prod_insp_hos LIKE #{parame} OR bir_mater_hos LIKE #{parame} OR bir_operation_time = #{parame}
+    </select>
+
+</mapper>

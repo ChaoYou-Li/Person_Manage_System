@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="layui-body" th:fragment="employee_list_model" th:case="'employee_list_model'">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <fieldset class="layui-elem-field">
+            <legend>员工信息管理 - 员工信息列表</legend>
+            <div class="layui-field-box">
+                <form class="layui-form" method="post" th:action="@{/employee/search}">
+                    <div class="layui-form-item" style="text-align:center;">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="请输入员工姓名" type="text" name="content" value="">
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="text-align:left;">
+                            <div class="layui-input-inline">
+                                <button class="layui-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="/employee/emp" dw-title="新增用户" dw-width="70%" dw-height="80%">
+                        <i class="layui-icon">&#xe654;</i>新增
+                    </button>
+                    <button class="layui-btn layui-btn-xs layui-btn-danger batch-delete" dw-url="/employee/batchDelete">
+                        <i class="layui-icon">&#xe640;</i>删除
+                    </button>
+                    <button class="layui-btn layui-btn-xs refresh" dw-url="/employee/emps">
+                        <i class="layui-icon">&#x1002;</i>刷新
+                    </button>
+                </div>
+                <hr>
+                <table class="layui-table" id="tableDemo">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col width="100">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="selectAll"><input type="checkbox"></th>
+                        <th>编号</th>
+                        <th>姓名</th>
+                        <th>个人照片</th>
+                        <th>性别</th>
+                        <th>是否结婚</th>
+                        <th>民族</th>
+                        <th>工号</th>
+                        <th>生日</th>
+                        <th>身份证</th>
+                        <th>部门</th>
+                        <th>职位</th>
+                        <th>毕业院校</th>
+                        <th>联系电话</th>
+                        <th>邮箱</th>
+                        <th>居住地</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="employee : ${employees}">
+                        <td><input type="checkbox" name="empId" th:value="${employee.empId}"></td>
+                        <td th:text="${employee.empId}"></td>
+                        <td th:text="${employee.empName}"></td>
+                        <td><img th:src="${employee.empPic}"></td>
+                        <!--条件判断 如果为1即为男，其他即为女 eq判断int类型 ==判断string类型-->
+                        <td th:if="${employee.empSex} eq 1 " >男</td>
+                        <td th:unless="${employee.empSex} eq 1" >女</td>
+                        <!--条件判断 如果为1即为已婚，其他即为未婚 eq判断int类型 ==判断string类型-->
+                        <td th:if="${employee.empMarry} eq 1" >已婚</td>
+                        <td th:unless="${employee.empMarry} eq 1" >未婚</td>
+                        <td th:text="${employee.empNation}"></td>
+                        <td th:text="${employee.empNumber}"></td>
+                        <!--日期格式化-->
+                        <td th:text="${#dates.format(employee.empBirthday,'yyyy-MM-dd')}"></td>
+                        <td th:text="${employee.empCard}"></td>
+                        <td th:text="${employee.empDepart}"></td>
+                        <td th:text="${employee.empPosition}"></td>
+                        <td th:text="${employee.empSchool}"></td>
+                        <td th:text="${employee.empPhone}"></td>
+                        <td th:text="${employee.empEmail}"></td>
+                        <td th:text="${employee.empAddr}"></td>
+
+                        <td class="text-center">
+                            <div class="layui-btn-group" ><!--get请求-->
+                                <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog"  th:dw-url="'/employee/emp/'+${employee.empId}"  dw-title="编辑员工" dw-width="70%" dw-height="80%">
+                                    <i class="layui-icon">&#xe642;</i>编辑
+                                </button>                            <!--delete请求，想了解如何实现，请阅读dw.js-->
+                                <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" th:dw-url="'/employee/emp/'+${employee.empId}" th:dw-title="${employee.empName}">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+
+        <div style="position: absolute; bottom: 0px; line-height: 30px; width: 100%;">
+            <!--分页-->
+            <div id="pageDemo" style="float: left"></div>
+
+            <!-- 导入/导出到 Excel 操作 -->
+            <div class="layui-btn-group" style="float: right; height: 55px; margin-top: 10px; margin-right: 35px;">
+                <button class="layui-btn layui-btn-sm refresh" dw-url="/employee/exportExcel">
+                    <i class="layui-icon">&#xe681;</i>导出Excel
+                </button>
+
+                <button class="layui-btn layui-btn-sm operation-excel" id="operation-excel" dw-url="/employee/updateExcel">
+                    <i class="layui-icon">&#xe601;</i>Excel导入
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

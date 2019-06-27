@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.FamilyInfoMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.FamilyInfo">
+        <id column="fam_id" property="famId" />
+        <result column="fam_name" property="famName" />
+        <result column="fam_relation" property="famRelation" />
+        <result column="fam_sex" property="famSex" />
+        <result column="fam_work_palce" property="famWorkPalce" />
+        <result column="fam_phone" property="famPhone" />
+        <result column="fam_sign" property="famSign" />
+        <result column="emp_id" property="empId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fam_id, fam_name, fam_relation, fam_sex, fam_work_palce, fam_phone, fam_sign, emp_id
+    </sql>
+    <select id="findAllFamilyInfoBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.FamilyInfo">
+        SELECT * FROM family_info WHERE fam_name LIKE #{parame} OR fam_relation LIKE #{parame} OR fam_sex LIKE #{parame} OR fam_work_palce LIKE #{parame} OR fam_phone LIKE #{parame} OR fam_sign LIKE #{parame}
+    </select>
+</mapper>

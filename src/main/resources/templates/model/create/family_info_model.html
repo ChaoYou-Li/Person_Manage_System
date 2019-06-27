@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset class="layui-elem-field" th:fragment="family_info_model" th:case="'family_info_model'">
+    <legend th:text="${type == 'create' ? '家庭情况 - 信息新增' : '家庭情况 - 信息更新'}"></legend>
+    <div class="layui-field-box">
+        <!--post方式提交-->
+        <form class="layui-form" th:method="${type == 'create' ? 'get' : 'post'}" th:action="@{${req_url}}">
+            <input type="hidden" name="famId" th:if="${familyInfo != null}" th:value="${familyInfo.famId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="famName" th:value="${familyInfo != null} ? ${familyInfo.famName}" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">关系</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="famRelation" value="父母" title="父母" th:checked="${familyInfo != null} ? ${familyInfo.famRelation == '父母'}">
+                    <input type="radio" name="famRelation" value="配偶" title="配偶" th:checked="${familyInfo != null} ? ${familyInfo.famRelation == '配偶'}">
+                    <input type="radio" name="famRelation" value="子女" title="子女" th:checked="${familyInfo != null} ? ${familyInfo.famRelation == '子女'}">
+                    <input type="radio" name="famRelation" value="紧急联系人" title="紧急联系人" th:checked="${familyInfo != null} ? ${familyInfo.famRelation == '紧急联系人'}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="famSex" value="1" title="男" th:checked="${familyInfo != null} ? ${familyInfo.famSex == 1}">
+                    <input type="radio" name="famSex" value="0" title="女" th:checked="${familyInfo != null} ? ${familyInfo.famSex == 0}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">工作单位</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="famWorkPalce" th:value="${familyInfo != null} ? ${familyInfo.famWorkPalce}" required  lay-verify="required" placeholder="请输入工作单位" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="famPhone" th:value="${familyInfo != null} ? ${familyInfo.famPhone}" required  lay-verify="phone" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">标记情况</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="famSign" value="1" title="父母" th:checked="${familyInfo != null} ? ${familyInfo.famSign == 1}">
+                    <input type="radio" name="famSign" value="2" title="配偶" th:checked="${familyInfo != null} ? ${familyInfo.famSign == 2}">
+                    <input type="radio" name="famSign" value="3" title="子女" th:checked="${familyInfo != null} ? ${familyInfo.famSign == 3}">
+                    <input type="radio" name="famSign" value="4" title="紧急" th:checked="${familyInfo != null} ? ${familyInfo.famSign == 4}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">员工</label>
+                <div class="layui-input-block">
+                    <select name="empId" required  lay-verify="required" placeholder="请选择员工">
+                        <option th:each="employee:${employees}" th:selected="${familyInfo != null && familyInfo.empId == employee.empId} ? 'selected'" th:value="${employee.empId}">[[${employee.empName}]]</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+</fieldset>
+</body>
+</html>

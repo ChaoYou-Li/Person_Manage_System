@@ -1,0 +1,62 @@
+<!DOCTYPE html >
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>人事后台管理系统-登录</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}" media="all" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+</head>
+<body class="beg-login-bg">
+    <div class="beg-login-box">
+        <header>
+            <h1>人事后台管理系统</h1>
+        </header>
+        <div class="beg-login-main">
+            <form  class="layui-form" th:method="post" th:action="@{/login/login}">
+
+                <!--取后台返回的信息-->
+                <div class="layui-form-item" style="color: deeppink" th:if="${session.msg != null}" >[[${session.msg}]]</div>
+
+                <div class="layui-form-item">
+                    <label class="beg-login-icon">
+                        <i class="layui-icon">&#xe612;</i>
+                    </label>
+                    <input type="text" lay-verify="required" name="username" autocomplete="off" placeholder="这里输入账号" class="layui-input" lay-verType="tips">
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="beg-login-icon">
+                        <i class="layui-icon">&#xe642;</i>
+                    </label>
+                    <input type="password" lay-verify="required" name="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" lay-verType="tips">
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="color: #1E9FFF">管理员</label>
+                    <div class="layui-input-block" style="color: #1E9FFF">
+                        <input type="radio" name="sign" value="2" title="人事管理员" checked="" >
+                        <input type="radio" name="sign" value="1" title="系统管理员" >
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="beg-pull">
+                        <button type="submit" class="layui-btn layui-btn-normal" style="width:100%;" lay-submit lay-filter="formDemo">
+                            登　　录
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <footer>
+            <p>power by dw © </p>
+        </footer>
+    </div>
+    <script type="text/javascript" th:src="@{/javascript/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/javascript/login.js}"></script>
+</body>
+</html>

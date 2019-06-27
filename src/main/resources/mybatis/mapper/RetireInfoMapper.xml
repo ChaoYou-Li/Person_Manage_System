@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zdxh.personnelmanage.mapper.RetireInfoMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.zdxh.personnelmanage.po.RetireInfo">
+        <id column="ret_id" property="retId" />
+        <result column="ret_name" property="retName" />
+        <result column="ret_sex" property="retSex" />
+        <result column="ret_nation" property="retNation" />
+        <result column="ret_birthday" property="retBirthday" />
+        <result column="ret_id_card" property="retIdCard" />
+        <result column="ret_bank_card" property="retBankCard" />
+        <result column="ret_phone" property="retPhone" />
+        <result column="ret_addr" property="retAddr" />
+        <result column="ret_emer_phone" property="retEmerPhone" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ret_id, ret_name, ret_sex, ret_nation, ret_birthday, ret_id_card, ret_bank_card, ret_phone, ret_addr, ret_emer_phone
+    </sql>
+    <select id="findAllRetireInfoBySearch" parameterType="string" resultType="cn.zdxh.personnelmanage.po.RetireInfo">
+        SELECT * FROM retire_info WHERE ret_name LIKE #{parame} OR ret_sex LIKE #{parame} OR ret_nation LIKE #{parame} OR ret_id_card LIKE #{parame} OR ret_bank_card LIKE #{parame} OR ret_phone LIKE #{parame} OR ret_addr LIKE #{parame} OR ret_emer_phone LIKE #{parame}
+    </select>
+
+</mapper>

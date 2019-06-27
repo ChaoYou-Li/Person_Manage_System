@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>人事管理系统</title>
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+
+<div class="layui-container">  
+    <div class="layui-row">
+        <div class="layui-col-lg12">
+
+            <!-- 导入/model/create/*_model -->
+            <div th:switch="${operation}">
+                <div th:replace="model/create/employee_create_model :: employee_create_model"></div>
+                <div th:replace="model/create/birthday_record_model :: birthday_record_model"></div>
+                <div th:replace="model/create/contract_sign_model :: contract_sign_model"></div>
+                <div th:replace="model/create/employee_card_model :: employee_card_model"></div>
+                <div th:replace="model/create/family_info_model :: family_info_model"></div>
+                <div th:replace="model/create/free_charge_model :: free_charge_model"></div>
+                <div th:replace="model/create/health_certificate_model :: health_certificate_model"></div>
+                <div th:replace="model/create/induction_info_model :: induction_info_model"></div>
+                <div th:replace="model/create/professional_skill_model :: professional_skill_model"></div>
+                <div th:replace="model/create/provident_fund_purchase_model :: provident_fund_purchase_model"></div>
+                <div th:replace="model/create/purchase_insurance_model :: purchase_insurance_model"></div>
+                <div th:replace="model/create/receive_training_model :: receive_training_model"></div>
+                <div th:replace="model/create/retire_info_model :: retire_info_model"></div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/javascript/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/javascript/dw_form_submit.js}"></script>
+<script type="text/javascript" th:src="@{/javascript/upload_pic.js}"></script>
+</body>
+</html>

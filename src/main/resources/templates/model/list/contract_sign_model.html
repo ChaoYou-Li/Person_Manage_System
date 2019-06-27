@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="layui-body" th:fragment="contract_sign_model" th:case="'contract_sign_model'">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <fieldset class="layui-elem-field">
+            <legend>合同签订情况 - 信息列表</legend>
+            <div class="layui-field-box">
+                <form class="layui-form" method="post" th:action="@{/ContractSign/search}">
+                    <div class="layui-form-item" style="text-align:center;">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="请输入要查询的信息" type="text" name="data" value="">
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="text-align:left;">
+                            <div class="layui-input-inline">
+                                <button class="layui-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="/ContractSign/create" dw-title="新增用户" dw-width="70%" dw-height="80%">
+                        <i class="layui-icon">&#xe654;</i>新增
+                    </button>
+                    <button class="layui-btn layui-btn-xs layui-btn-danger batch-delete" id="delete_data_id" onclick="getCheckData()" dw-url="/ContractSign/batchDelete">
+                        <i class="layui-icon">&#xe640;</i>删除
+                    </button>
+                    <button class="layui-btn layui-btn-xs refresh" dw-url="/ContractSign/list">
+                        <i class="layui-icon">&#x1002;</i>刷新
+                    </button>
+                </div>
+                <hr>
+                <table class="layui-table" id="tableDemo">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col width="100">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="selectAll"><input type="checkbox"></th>
+                        <th>编号</th>
+                        <th>合同类型</th>
+                        <th>合同到期时间</th>
+                        <th>合同历史签订情况</th>
+                        <th>员工编号</th>
+                        <th style="text-align:center;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="contractSign : ${list}">
+                        <td><input type="checkbox" name="empId" class="id" th:value="${contractSign.conId}"></td>
+                        <td th:text="${contractSign.conId}"></td>
+                        <td th:text="${contractSign.conType}"></td>
+                        <td th:text="${#dates.format(contractSign.conEnpireTime, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${contractSign.conHistory}"></td>
+                        <td th:text="${contractSign.empId}"></td>
+
+                        <td class="text-center">
+                            <div class="layui-btn-group" ><!--get请求-->
+                                <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog"  th:dw-url="'/ContractSign/update/'+${contractSign.conId}"  dw-title="编辑员工" dw-width="70%" dw-height="80%">
+                                    <i class="layui-icon">&#xe642;</i>编辑
+                                </button>                            <!--delete请求，想了解如何实现，请阅读dw.js-->
+                                <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" th:dw-url="'/ContractSign/delete/'+${contractSign.conId}" th:dw-title="${contractSign.conId}">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+
+        <div style="position: absolute; bottom: 0px; line-height: 30px; width: 100%;">
+            <!--分页-->
+            <div id="pageDemo" style="float: left"></div>
+
+            <!-- 导入/导出到 Excel 操作 -->
+            <div class="layui-btn-group" style="float: right; height: 55px; margin-top: 10px; margin-right: 35px;">
+                <button class="layui-btn layui-btn-sm refresh" dw-url="/ContractSign/exportExcel">
+                    <i class="layui-icon">&#xe681;</i>导出Excel
+                </button>
+
+                <button class="layui-btn layui-btn-sm operation-excel" id="operation-excel" dw-url="/ContractSign/updateExcel">
+                    <i class="layui-icon">&#xe601;</i>Excel导入
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
